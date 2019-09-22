@@ -75,9 +75,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Product() {
-    }
-
     public Product(String name, BigDecimal price, String category, Integer quantity){
         this.name = name;
         this.price = price;

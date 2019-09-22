@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class ProductDAOTests {
@@ -25,25 +27,42 @@ public class ProductDAOTests {
 
     @Test
     public void addAndReturnProduct(){
+        // given
+        productDAO.save(new Product("testProduct", BigDecimal.ONE, "testCategory", 1));
+        productDAO.save(new Product("testProduct", BigDecimal.ONE, "testCategory", 1));
+        productDAO.save(new Product("testProduct", BigDecimal.ONE, "testCategory", 1));
+        productDAO.save(new Product("testProduct", BigDecimal.ONE, "testCategory", 1));
+        productDAO.save(new Product("testProduct", BigDecimal.ONE, "testCategory", 1));
 
-        Product product = new Product("testProduct", BigDecimal.ONE, "testDescription", 1);
-
-        productDAO.save(product);
-
-        //Check if database contains product by name;
-
+        // when
         List<Product> list = productDAO.findByName("testProduct");
-        if (list == null)
-        {
-            Assert.fail("testProduct not found");
-        }
-        else
-        {
-            for (Product product1 : list)
-            {
-                System.out.println("found product: " + product);
-            }
-        }
 
+        // then
+        assertEquals(list.get(0).getName(), "testProduct");
+        assertEquals(list.get(0).getName(), "testProduct");
+        assertEquals(list.get(0).getName(), "testProduct");
+        assertEquals(list.get(0).getName(), "testProduct");
+        assertEquals(list.get(0).getName(), "testProduct");
+        assertEquals(list.get(0).getName(), "testProduct");
+    }
+
+    @Test
+    public void shouldReturnMultipleItems() {
+        // given
+        addRandomProductsToDB(10);
+
+
+    }
+
+    private void addRandomProductsToDB(int i) {
+        for (int j = 0; j < i; j++) {
+            Product product = new Product(String.valueOf(i), BigDecimal.ONE, "category", 1);
+            
+            String lala = new String("^lala");
+
+            String s = new String("^lala");
+            
+            
+        }
     }
 }
